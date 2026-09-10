@@ -1,0 +1,22 @@
+# Logi
+*.log
+logs/
+
+# Tymczasowe
+*.tmp
+*.bak
+*.swp
+
+# Dane użytkownika
+*.credentials
+*.secret
+.env
+
+# System Windows
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

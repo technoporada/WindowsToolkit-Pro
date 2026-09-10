@@ -1,0 +1,128 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔧 Ark's Ultimate Toolbox</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tool-card:hover {
+            border-color: #00ff88;
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .tool-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .status-online { background: #00ff00; }
+        .status-offline { background: #ff0000; }
+        .status-warning { background: #ffff00; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Ark's Ultimate Toolbox</h1>
+    <p>Wszystkie Twoje narzędzia w jednym miejscu</p>
+    
+    <div class="tool-grid">
+        <!-- MusicTools -->
+        <div class="tool-card" onclick="launchTool('musictools')">
+            <div class="tool-icon">🎵</div>
+            <h3>MusicTools</h3>
+            <p>Pobieranie i konwersja muzyki</p>
+            <div class="status-indicator status-online"></div>
+            <span>Dostępny</span>
+        </div>
+        
+        <!-- TTS Assistant -->
+        <div class="tool-card" onclick="launchTool('tts')">
+            <div class="tool-icon">🎤</div>
+            <h3>TTS Assistant</h3>
+            <p>Czytanie wiadomości na głos</p>
+            <div class="status-indicator status-warning"></div>
+            <span>Wymaga Python</span>
+        </div>
+        
+        <!-- Codec Pack -->
+        <div class="tool-card" onclick="launchTool('codecpack')">
+            <div class="tool-icon">📦</div>
+            <h3>Codec Pack</h3>
+            <p>Własna paczka codeków</p>
+            <div class="status-indicator status-offline"></div>
+            <span>W budowie</span>
+        </div>
+        
+        <!-- System Optimizer -->
+        <div class="tool-card" onclick="launchTool('optimizer')">
+            <div class="tool-icon">⚡</div>
+            <h3>System Optimizer</h3>
+            <p>Debloat i optymalizacja Windows</p>
+            <div class="status-indicator status-online"></div>
+            <span>Gotowy</span>
+        </div>
+        
+        <!-- Equalizer -->
+        <div class="tool-card" onclick="launchTool('equalizer')">
+            <div class="tool-icon">🎛️</div>
+            <h3>Audio Equalizer</h3>
+            <p>Systemowy equalizer APO</p>
+            <div class="status-indicator status-warning"></div>
+            <span>Wymaga instalacji</span>
+        </div>
+        
+        <!-- Stealth Browser -->
+        <div class="tool-card" onclick="launchTool('stealth')">
+            <div class="tool-icon">🕵️‍♂️</div>
+            <h3>Stealth Browser</h3>
+            <p>Przeglądarka z adblockiem</p>
+            <div class="status-indicator status-online"></div>
+            <span>Dostępny</span>
+        </div>
+    </div>
+    
+    <script>
+        const { ipcRenderer } = require('electron');
+        
+        function launchTool(toolName) {
+            ipcRenderer.send('launch-tool', toolName);
+        }
+        
+        // Check tool status on load
+        ipcRenderer.on('tool-status', (event, status) => {
+            console.log('Tool status:', status);
+        });
+    </script>
+</body>
+</html>

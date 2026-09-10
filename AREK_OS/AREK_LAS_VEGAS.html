@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AREK.EXE - LAS VEGAS DASHBOARD</title>
+    <style>
+        body { 
+            background: linear-gradient(135deg, #050505, #1a0033); 
+            color: #00ffcc; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; 
+        }
+        .grid { display: grid; grid-template-columns: 250px 1fr 300px; height: 100vh; }
+        
+        /* Panel Agentów (z agenci.html) */
+        .sidebar { border-right: 2px solid #ff3366; padding: 20px; background: rgba(255,51,102,0.05); }
+        
+        /* Twoje Kasyno */
+        .casino-core { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .slot-machine { 
+            width: 400px; height: 200px; border: 5px solid #f39c12; 
+            border-radius: 20px; display: flex; gap: 10px; padding: 20px; background: #000;
+            box-shadow: 0 0 30px #f39c12;
+        }
+        .reel { 
+            width: 100px; height: 150px; background: #222; border: 2px solid #555;
+            display: flex; align-items: center; justify-content: center; font-size: 40px;
+        }
+        
+        /* Przycisk akcji */
+        .spin-btn {
+            margin-top: 30px; padding: 15px 40px; font-size: 24px; font-weight: bold;
+            background: #ff3366; color: white; border: none; cursor: pointer;
+            border-radius: 50px; box-shadow: 0 0 20px #ff3366;
+        }
+
+        /* Podgląd Systemu */
+        .system-status { border-left: 2px solid #00ffcc; padding: 20px; background: rgba(0,255,204,0.05); }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="sidebar">
+            <h3>AGENCI</h3>
+            <div id="agent-list">
+                <p>🟢 AREK.EXE</p>
+                <p>🟣 NYX_V8</p>
+                <p>🔴 KASIA (Mood: Happy)</p>
+            </div>
+            <hr>
+            <button onclick="alert('Odpalam Stealth Browser...')">Odpal Stealth</button>
+        </div>
+
+        <div class="casino-core">
+            <h1>🎰 WYRWINOS CASINO 🎰</h1>
+            <div class="slot-machine" id="slots">
+                <div class="reel" id="r1">?</div>
+                <div class="reel" id="r2">?</div>
+                <div class="reel" id="r3">?</div>
+            </div>
+            <button class="spin-btn" onclick="spin()">ZAGRAJ O CZYSTY SYSTEM!</button>
+            <p id="result-text"></p>
+        </div>
+
+        <div class="system-status">
+            <h3>DEBIL DETECTOR</h3>
+            <div id="stats">
+                <p>Irytacja: 12%</p>
+                <p>Kliknięcia: Normalne</p>
+                <p>System: Stabilny (ThinkPad Mode)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const symbols = ['💻', '😘', '🤪', '🛡️', '💰'];
+        function spin() {
+            const r1 = symbols[Math.floor(Math.random()*symbols.length)];
+            const r2 = symbols[Math.floor(Math.random()*symbols.length)];
+            const r3 = symbols[Math.floor(Math.random()*symbols.length)];
+            
+            document.getElementById('r1').innerText = r1;
+            document.getElementById('r2').innerText = r2;
+            document.getElementById('r3').innerText = r3;
+
+            if(r1 === r2 && r2 === r3) {
+                document.getElementById('result-text').innerText = "JACKPOT! Odpalam Windows Toolkit! 🚀";
+                // Tu w przyszłości wyślemy sygnał do Pythona
+            } else {
+                document.getElementById('result-text').innerText = "Próbuj dalej, mordo! Kasia czeka. 😘";
+            }
+        }
+    </script>
+</body>
+</html>

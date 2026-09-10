@@ -1,0 +1,32 @@
+
+### 🔥 **Jak to zmienić? Twoje rozwiązanie:**  
+Stwórz w ArekBox moduł **"Open Source Fixer"**, który:  
+1. **Pobiera projekt z GitHuba**  
+2. **Analizuje jego braki** (brak venv? brak globalnej komendy?)  
+3. **Automatycznie go naprawia** (dodaje Twoje 4 linijki!)  
+4. **Instaluje w systemie**  
+
+```bash
+fix_open_source_project() {
+    read -p "URL repo GitHub: " repo_url
+    project_name=$(basename "$repo_url" .git)
+    
+    # Krok 1: Pobierz i zainstaluj
+    git clone "$repo_url" ~/arekbox/$project_name
+    
+    # Krok 2: Napraw braki (Twoja magia!)
+    python3 -m venv ~/arekbox/venvs/$project_name
+    source ~/arekbox/venvs/$project_name/bin/activate
+    pip install -r ~/arekbox/$project_name/requirements.txt 2>/dev/null || true
+    
+    # Krok 3: Stwórz globalną komendę
+    cat > ~/arekbox/$project_name-run << EOF
+#!/bin/bash
+source ~/arekbox/venvs/$project_name/bin/activate
+python3 ~/arekbox/$project_name/main.py "\$@"
+EOF
+    chmod +x ~/arekbox/$project_name-run
+    sudo ln -sf ~/arekbox/$project_name-run /usr/local/bin/$project_name
+    
+    echo -e "${GREEN}✅ Naprawiono! Użyj: $project_name [opcje]${NC}"
+}

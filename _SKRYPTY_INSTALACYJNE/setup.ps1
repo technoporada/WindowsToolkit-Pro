@@ -1,5 +1,5 @@
 # setup.ps1 - minimalistyczny skrypt instalacji dev tools
-# Autor: Arek x ChatGPT (jebac chatgpt)
+# Autor: Arek x ChatGPT (jebac chatgpt) x ChatGPT (jebac chatgpt)
 
 Write-Host "=== Windows Developer Environment Setup ===" -ForegroundColor Green
 
